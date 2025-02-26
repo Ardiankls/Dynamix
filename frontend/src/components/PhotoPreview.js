@@ -128,6 +128,7 @@ const frames = {
         drawStar(x + width - 120, y + height - 5, 12, "#40E0D0");
    }
   }
+  
 };
 
 const PhotoPreview = ({ capturedImages }) => {
@@ -144,63 +145,52 @@ const PhotoPreview = ({ capturedImages }) => {
     const canvas = stripCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-
   
-    const imgWidth = 400;  
+    // Dimensions
+    const imgWidth = 550;  
     const imgHeight = 300; 
-    const borderSize = 40;  
-    const photoSpacing = 20;  
+    const borderSize = 80;  
+    const photoSpacing = 40;  
     const textHeight = 50;  
-    const totalHeight = (imgHeight * 4) + (photoSpacing * 3) + (borderSize * 2) + textHeight;
-
+    const totalHeight = (imgHeight * 3) + (photoSpacing * 2) + (borderSize * 4) + textHeight;
+  
+    // Set canvas size
     canvas.width = imgWidth + borderSize * 2;
     canvas.height = totalHeight;
-
+  
+    // Fill background
     ctx.fillStyle = stripColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+  
+    // Load the Nibbles & Morket logo
+    const logo = new Image();
+    logo.src = require("../img/branding_logo.PNG"); // Update the path if needed
+  
     let imagesLoaded = 0;
     capturedImages.forEach((image, index) => {
       const img = new Image();
       img.src = image;
       img.onload = () => {
         const yOffset = borderSize + (imgHeight + photoSpacing) * index;
-
-        const imageRatio = img.width / img.height;
-        const targetRatio = imgWidth / imgHeight;
-
-        let sourceWidth = img.width;
-        let sourceHeight = img.height;
-        let sourceX = 0;
-        let sourceY = 0;
-
-        if (imageRatio > targetRatio) {
-            sourceWidth = sourceHeight * targetRatio;
-            sourceX = (img.width - sourceWidth) / 2;
-        } else {
-            sourceHeight = sourceWidth / targetRatio;
-            sourceY = (img.height - sourceHeight) / 2;
-        }
-
-        ctx.drawImage(
-            img,
-            sourceX, sourceY, sourceWidth, sourceHeight, 
-            borderSize, yOffset, imgWidth, imgHeight      
-        );
-
-        if (frames[selectedFrame] && typeof frames[selectedFrame].draw === 'function') {
-          frames[selectedFrame].draw(
-              ctx,
-              borderSize,
-              yOffset,
-              imgWidth,
-              imgHeight
-          );
-      }
-        
+  
+        // Draw the photo
+        ctx.drawImage(img, borderSize, yOffset, imgWidth, imgHeight);
+  
         imagesLoaded++;
-
+  
+        // When all photos are loaded, draw the logo and text
         if (imagesLoaded === capturedImages.length) {
+          // Draw the logo at the bottom
+          if (logo.complete) {
+            const logoWidth = 500; // Adjust the width of the logo
+            const logoHeight = 190; // Adjust the height of the logo
+            const logoX = borderSize + (imgWidth - logoWidth) / 2; // Center the logo horizontally
+            const logoY = totalHeight - borderSize - logoHeight - 20; // Position the logo at the bottom
+  
+            ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+          }
+  
+          // Add timestamp and branding text
           const now = new Date();
           const timestamp = now.toLocaleDateString('en-US', {
             month: '2-digit',
@@ -212,32 +202,23 @@ const PhotoPreview = ({ capturedImages }) => {
             minute: '2-digit',
             hour12: true
           });
-          
-
-
-          ctx.fillStyle = stripColor === "black" ? "#FFFFFF" : "#000000";
-          ctx.font = "20px Arial";
+  
+          ctx.fillStyle = stripColor === "black" ? "#FFFFFF" : "#90812A";
+          ctx.font = "15px Arial";
           ctx.textAlign = "center";
-          
-          ctx.fillText("Picapica  " + timestamp, canvas.width / 2, totalHeight - borderSize * 1);
-
-
+          ctx.fillText("@dynamix_gii | @gii.vancouver | " + timestamp, canvas.width / 2, totalHeight - borderSize * 0.9);
+  
           ctx.fillStyle = stripColor === "black" ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)";
           ctx.font = "12px Arial";  
           ctx.textAlign = "center";
-
-          ctx.fillText(
-              "© 2025 AW",
-              canvas.width - borderSize,
-              totalHeight - borderSize / 2
-          );
+          ctx.fillText("© 2025 AW", canvas.width - borderSize, totalHeight - borderSize / 2);
         }
       };
     });
-  }, [capturedImages, stripColor, selectedFrame]);
+  }, [capturedImages, stripColor]);
 
   useEffect(() => {
-    if (capturedImages.length === 4) {
+    if (capturedImages.length === 3) {
       setTimeout(() => {
         generatePhotoStrip();
       }, 100);
@@ -395,7 +376,7 @@ const PhotoPreview = ({ capturedImages }) => {
           <button onClick={() => setStripColor("#f6d5da")}>Pink</button>
           <button onClick={() => setStripColor("#dde6d5")}>Green</button>
           <button onClick={() => setStripColor("#adc3e5")}>Blue</button>
-          <button onClick={() => setStripColor("#FFF2CC")}>Yellow</button>
+          <button onClick={() => setStripColor("#F1E36E")}>Yellow</button>
           <button onClick={() => setStripColor("#dbcfff")}>Purple</button>
         </div>
   

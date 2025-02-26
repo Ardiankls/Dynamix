@@ -30,7 +30,7 @@ function App() {
         <div className={`nav-links ${isMobileNavOpen ? "open" : ""}`}>
           <Link to="/" onClick={closeMobileNav}>Home</Link>
           <Link to="/privacy-policy" onClick={closeMobileNav}>Privacy Policy</Link>
-          <Link to="/contact" onClick={closeMobileNav}>Contact</Link>
+          {/* <Link to="/contact" onClick={closeMobileNav}>Contact</Link> */}
         </div>
 
         {/* Hamburger Icon (Mobile Only) */}

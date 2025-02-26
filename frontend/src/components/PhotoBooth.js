@@ -63,7 +63,7 @@ const PhotoBooth = ({ setCapturedImages }) => {
     const newCapturedImages = [];
   
     const captureSequence = async () => {
-        if (photosTaken >= 4) {
+        if (photosTaken >= 3) {
             setCountdown(null);
             setCapturing(false);
 
