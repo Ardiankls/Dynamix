@@ -10,7 +10,7 @@ const Home = () => {
       <div className="home-container">
         <h1 className="text-5xl font-bold text-pink-600 mb-4">Dynamix</h1>
         <p className="text-lg text-gray-700 mb-6">
-          Welcome to Agnes' photobooth! This is your personal photobooth at home.
+        Welcome to Nibbles and Nook Market, enliven and capture your moment with a photo booth.
         </p>      
           
         <img src="/photobooth-strip.png" alt="photobooth strip" className="photobooth-strip"/>
