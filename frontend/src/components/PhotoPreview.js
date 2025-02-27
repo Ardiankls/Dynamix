@@ -134,7 +134,7 @@ const frames = {
 const PhotoPreview = ({ capturedImages }) => {
   const stripCanvasRef = useRef(null);
   const navigate = useNavigate();
-  const [stripColor, setStripColor] = useState("white");
+  const [stripColor, setStripColor] = useState("#F1E36E");
   const [selectedFrame, setSelectedFrame] = useState("none");
   const [email, setEmail] = useState("");  
   const [status, setStatus] = useState(""); 
@@ -399,7 +399,7 @@ const PhotoPreview = ({ capturedImages }) => {
     <div className="photo-preview">
       <h2>Photo Strip Preview</h2>
   
-      <div className="control-section">
+      {/* <div className="control-section">
         <h3>Customize your photo strip</h3>
   
         <p className="section-title">Frame Color</p>
@@ -419,7 +419,7 @@ const PhotoPreview = ({ capturedImages }) => {
           <button onClick={() => setSelectedFrame("pastel")}>Girlypop Stickers</button>
           <button onClick={() => setSelectedFrame("cute")}>Cute Stickers</button>
         </div>
-      </div>
+      </div> */}
   
       <canvas ref={stripCanvasRef} className="photo-strip" />
   
