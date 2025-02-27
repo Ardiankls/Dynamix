@@ -164,8 +164,14 @@ const PhotoPreview = ({ capturedImages }) => {
   
     // Load the Nibbles & Morket logo
     const logo = new Image();
-    logo.src = require("../img/branding_logo.PNG"); // Update the path if needed
-  
+    const girlAvatar = new Image();
+    const bunnyAvatar = new Image();
+    const guyAvatar = new Image();
+    logo.src = require("../img/branding_logo.PNG");
+    girlAvatar.src = require("../img/girl-avatar.png"); 
+    bunnyAvatar.src = require("../img/bunny-avatar.png"); 
+    guyAvatar.src = require("../img/guy-avatar.png"); 
+
     let imagesLoaded = 0;
     capturedImages.forEach((image, index) => {
       const img = new Image();
@@ -188,6 +194,33 @@ const PhotoPreview = ({ capturedImages }) => {
             const logoY = totalHeight - borderSize - logoHeight - 20; // Position the logo at the bottom
   
             ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+          }
+
+          if (girlAvatar.complete) {
+            const girlAvatarWidth = 250; // Adjust the width of the logo
+            const girlAvatarHeight = 250; // Adjust the height of the logo
+            const girlAvatarX = borderSize + (imgWidth - girlAvatarWidth) * 1.34; // Center the logo horizontally
+            const girlAvatarY = totalHeight - borderSize - girlAvatarHeight * 4.5; // Position the logo at the bottom
+  
+            ctx.drawImage(girlAvatar, girlAvatarX, girlAvatarY, girlAvatarWidth, girlAvatarHeight);
+          }
+
+          if (bunnyAvatar.complete) {
+            const bunnyAvatarWidth = 250; // Adjust the width of the logo
+            const bunnyAvatarHeight = 250; // Adjust the height of the logo
+            const bunnyAvatarX = borderSize + (imgWidth - bunnyAvatarWidth) * -0.21; // Center the logo horizontally
+            const bunnyAvatarY = totalHeight - borderSize - bunnyAvatarHeight * 3.04; // Position the logo at the bottom
+  
+            ctx.drawImage(bunnyAvatar, bunnyAvatarX, bunnyAvatarY, bunnyAvatarWidth, bunnyAvatarHeight);
+          }
+
+          if (guyAvatar.complete) {
+            const guyAvatarWidth = 250; // Adjust the width of the logo
+            const guyAvatarHeight = 250; // Adjust the height of the logo
+            const guyAvatarX = borderSize + (imgWidth - guyAvatarWidth) * 1.28; // Center the logo horizontally
+            const guyAvatarY = totalHeight - borderSize - guyAvatarHeight * 1.6; // Position the logo at the bottom
+  
+            ctx.drawImage(guyAvatar, guyAvatarX, guyAvatarY, guyAvatarWidth, guyAvatarHeight);
           }
   
           // Add timestamp and branding text
