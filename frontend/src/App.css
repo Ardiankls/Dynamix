@@ -394,8 +394,8 @@ body {
 
 /* live cam*/
 .video-feed {
-  width: 600px;
-  height: 450px;
+  width: 700px;
+  height: 400px;
   object-fit: cover; 
   transform: scaleX(-1); 
   border-radius: 12px;

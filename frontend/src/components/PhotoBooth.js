@@ -35,7 +35,7 @@ const PhotoBooth = ({ setCapturedImages }) => {
         const constraints = {
           video: {
               facingMode: "user",
-              width: { ideal: 1920 }, 
+              width: { ideal: 2000 }, 
               height: { ideal: 1080 },
               frameRate: { ideal: 30 } 
           }
